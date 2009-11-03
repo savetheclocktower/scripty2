@@ -201,7 +201,10 @@ s2.css = {
    *      s2.css.interpolateLength('10%','30%',0.7) -> '24%'
   **/
   interpolateLength: function(from, to, position){
-    if(!from) from = '0'+to.gsub(s2.css.NUMBER,'');
+    // Firefox will give '0pt' for a computed '0' value. Ensure units match.
+    if (!from || from.startsWith('0')) {
+      from = '0' + to.gsub(s2.css.NUMBER, '');
+    }
     to.scan(s2.css.NUMBER, function(match){ to = 1*(match[1]); });
     return from.gsub(s2.css.NUMBER, function(match){
       return (1*(parseFloat(match[1]).tween(to, position).toFixed(3))).toString();

@@ -3,6 +3,7 @@ if (!window.S2) {
   S2 = s2;
 }
 
+//= require "layout"
 
 /**
  *  S2.UI
